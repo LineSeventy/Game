@@ -15,6 +15,16 @@ function getHumanChoice(){
 console.log(getHumanChoice())
 
 function playRound(humanChoice, computerChoice){
-    
+    if(humanChoice > computerChoice){
+        console.log("You win");
+    }
+    else if (humanChoice === computerChoice ){
+            console.log("Draw")
+    }
+    else {
+        console.log("You Lose")
+    }
 }
-
+const humanSelection    = getHumanChoice();
+const computerSelection = getComputerChoice();
+playRound(humanChoice, computerChoice);
