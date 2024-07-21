@@ -1,30 +1,46 @@
 let humanScore = 0,
     computerScore = 0;
 
-const rock = 0,
-     paper = 1,
-     scissor = 2;    
+const options = {
+    "rock" : 0,
+    "paper" : 1,
+    "scissors": 2
+};
     
 function getComputerChoice(){
     return Math.floor(Math.random() * 3);
 }
 
 function getHumanChoice(){
-    return prompt("Rock,Paper,Scissor").toLowerCase();
+    let choice = prompt("Rock, Paper, Scissors").toLowerCase();
+    return options[choice];
 }
-console.log(getHumanChoice())
- alert(getComputerChoice())
-function playRound(humanChoice, computerChoice){
-    if(humanChoice > computerChoice){
-        console.log("You win");
-    }
-    else if (humanChoice === computerChoice ){
-            console.log("Draw")
-    }
-    else {
-        console.log("You Lose")
+
+function playRound() {
+    let humanChoice = getHumanChoice();
+    let computerChoice = getComputerChoice();
+    if (humanChoice === undefined) {
+        console.log("invalid input");
+    } else {
+        if (humanChoice === computerChoice) {
+            console.log("It's a Draw");
+        } else if ((humanChoice + 1) % 3 === computerChoice) {
+            ++computerScore;
+            console.log("You lose");
+        } else {
+            ++humanScore;
+            console.log("You win");
+        }
     }
 }
-const humanSelection    = getHumanChoice();
-const computerSelection = getComputerChoice();
-playRound(humanChoice, computerChoice);
+
+let round = 0;
+function playGame(){
+    while(round < 5){
+        playRound()
+        ++round;
+        console.log(`Round ${round}: Human Score: ${humanScore}, Computer Score: ${computerScore}`);
+    }
+    console.log(`Final Score - Human: ${humanScore}, Computer: ${computerScore}`);
+}
+playGame();
