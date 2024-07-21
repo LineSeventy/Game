@@ -13,7 +13,7 @@ function getHumanChoice(){
     return prompt("Rock,Paper,Scissor").toLowerCase();
 }
 console.log(getHumanChoice())
-
+ alert(getComputerChoice())
 function playRound(humanChoice, computerChoice){
     if(humanChoice > computerChoice){
         console.log("You win");
