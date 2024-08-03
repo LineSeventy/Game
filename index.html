@@ -2,11 +2,22 @@
 <html en="us">
     <Head>
      <meta charset="utfs-8">   
-     <script src="./JS/script.js"></script>
+     <script src="./JS/script.js" defer></script>
      <link rel="stylesheet" href="./CSS/style.css">
      <title>Game</title>   
+     
     </Head>
     <Body>
-
+        <div id="container">
+            <h1 class="statusDisplay">Pick</h1>
+            <ul id="gameBtn">
+            <li><button class="rockBtn" value="0">Rock</button></li>
+            <li><button class="paperBtn" value="1">Paper</button></li>
+            <li><button class="scissorBtn" value="2">Scissor</button></li>
+            <h1 class="roundScore">Your Score: 0</h1>
+            <h1 class="roundDisplay">Round: </h1>
+            
+            </ul>
+        </div>
     </Body>
 </html>

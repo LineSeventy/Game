@@ -1,46 +1,55 @@
 let humanScore = 0,
-    computerScore = 0;
+    computerScore = 0,
+    round = 0;
 
-const options = {
-    "rock" : 0,
-    "paper" : 1,
-    "scissors": 2
-};
-    
-function getComputerChoice(){
+    let Status = document.querySelector(".statusDisplay");    
+function getComputerChoice() {
     return Math.floor(Math.random() * 3);
 }
 
-function getHumanChoice(){
-    let choice = prompt("Rock, Paper, Scissors").toLowerCase();
-    return options[choice];
+function playRound() {
+    let humanChoice;
+
+    let rock = document.querySelector(".rockBtn");
+    let paper = document.querySelector(".paperBtn");
+    let scissor = document.querySelector(".scissorBtn");
+
+    rock.addEventListener("click", () => handleChoice(0));
+    paper.addEventListener("click", () => handleChoice(1));
+    scissor.addEventListener("click", () => handleChoice(2));
 }
 
-function playRound() {
-    let humanChoice = getHumanChoice();
-    let computerChoice = getComputerChoice();
-    if (humanChoice === undefined) {
-        console.log("invalid input");
-    } else {
-        if (humanChoice === computerChoice) {
-            console.log("It's a Draw");
-        } else if ((humanChoice + 1) % 3 === computerChoice) {
-            ++computerScore;
-            console.log("You lose");
-        } else {
-            ++humanScore;
-            console.log("You win");
+function handleChoice(humanChoice) {
+    if (round < 5) {
+        let computerChoice = getComputerChoice();
+        calcResult(humanChoice, computerChoice);
+
+        round++;
+        let roundScore = document.querySelector(".roundScore");
+        roundScore.textContent = "Your Score: " + humanScore;
+        
+        let roundDisplay = document.querySelector(".roundDisplay");
+        roundDisplay.textContent = "Round: " + round;
+        if (round === 5) {
+          Status.textContent = "Game over! Final score - Human: " + humanScore + "| Computer: " + computerScore;
         }
     }
 }
 
-let round = 0;
-function playGame(){
-    while(round < 5){
-        playRound()
-        ++round;
-        console.log(`Round ${round}: Human Score: ${humanScore}, Computer Score: ${computerScore}`);
+function calcResult(humanChoice, computerChoice) {
+    if (humanChoice === computerChoice) {
+        Status.textContent = "It's a Draw";
+    } else if ((humanChoice + 1) % 3 === computerChoice) {
+        ++computerScore;
+        Status.textContent = "You lose";
+    } else {
+        ++humanScore;
+        Status.textContent = "You win";
     }
-    console.log(`Final Score - Human: ${humanScore}, Computer: ${computerScore}`);
 }
+
+function playGame() {
+    playRound();
+}
+
 playGame();
